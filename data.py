@@ -1,24 +1,22 @@
-import pandas as pd
-import numpy as np
-
-DATADIR = 'UCI HAR Dataset'
-
-SIGNALS = [
-    "body_acc_x",
-    "body_acc_y",
-    "body_acc_z",
-    "body_gyro_x",
-    "body_gyro_y",
-    "body_gyro_z",
-    "total_acc_x",
-    "total_acc_y",
-    "total_acc_z"
-]
-
 def _read_csv(filename):
+    import pandas as pd
     return pd.read_csv(filename, delim_whitespace=True, header=None)
 
 def load_signals(subset):
+    DATADIR = 'UCI HAR Dataset'
+
+    SIGNALS = [
+        "body_acc_x",
+        "body_acc_y",
+        "body_acc_z",
+        "body_gyro_x",
+        "body_gyro_y",
+        "body_gyro_z",
+        "total_acc_x",
+        "total_acc_y",
+        "total_acc_z"
+    ]
+
     signals_data = []
 
     for signal in SIGNALS:
@@ -30,6 +28,7 @@ def load_signals(subset):
     # Transpose is used to change the dimensionality of the output,
     # aggregating the signals by combination of sample/timestep.
     # Resultant shape is (7352 train/2947 test samples, 128 timesteps, 9 signals)
+    import numpy as np
     return np.transpose(signals_data, (1, 2, 0))
 
 def load_y(subset):
@@ -39,6 +38,9 @@ def load_y(subset):
     every sample objective as a 6 bits vector using One Hot Encoding
     (https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html)
     """
+    import pandas as pd
+    DATADIR = 'UCI HAR Dataset'
+
     filename = f'{DATADIR}/{subset}/y_{subset}.txt'
     y = _read_csv(filename)[0]
 
@@ -50,6 +52,6 @@ def load_data():
     Returns: X_train, X_test, y_train, y_test
     """
     X_train, X_test = load_signals('train'), load_signals('test')
-    y_train, y_test = load_y('train'), load_y('test')
+    Y_train, Y_test = load_y('train'), load_y('test')
 
-    return X_train, X_test, y_train, y_test
+    return X_train, X_test, Y_train, Y_test
