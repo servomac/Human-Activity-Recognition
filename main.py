@@ -18,20 +18,26 @@ def model(X_train, X_test, Y_train, Y_testt):
     n_classes = _count_classes(Y_train)
 
     model = Sequential()
-    model.add(LSTM(32, input_shape=(timesteps, input_dim)))
-    model.add(Dropout({{uniform(0, 1)}}))
-    model.add(Dense(n_classes, activation={{choice(['sigmoid', 'softmax'])}}))
+    if conditional({{choice(['one', 'two'])}}) == 'two':
+        model.add(LSTM(32, input_shape=(timesteps, input_dim), return_sequences=True))
+        model.add(Dropout({{uniform(0, 1)}}))
+        model.add(LSTM(32))
+        model.add(Dropout({{uniform(0, 1)}}))
+    else:
+        model.add(LSTM(32, input_shape=(timesteps, input_dim)))
+        model.add(Dropout({{uniform(0, 1)}}))
+    model.add(Dense(n_classes, activation='softmax'))
 
     model.compile(loss='categorical_crossentropy',
-                  optimizer={{choice(['rmsprop', 'adam', 'sgd'])}},
+                  optimizer='rmsprop',
                   metrics=['accuracy'])
 
     model.fit(X_train,
               Y_train,
-              batch_size={{choice([16, 32, 64, 128])}},
+              batch_size={{choice([32, 64])}},
               validation_data=(X_test, Y_test),
               verbose=2,
-              epochs=30)
+              epochs=64)
 
     score, acc = model.evaluate(X_test, Y_test, batch_size=16)
 
