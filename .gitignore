@@ -1,2 +1,4 @@
+*.zip
 UCI HAR Dataset/
 __pycache__/
+__MACOSX/

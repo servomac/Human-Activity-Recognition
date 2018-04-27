@@ -1,5 +1,7 @@
 # Human Activity Recognition from smartphone signals
 
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/servomac)
+
 ## Usage
 
 Download the [dataset](https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones):
