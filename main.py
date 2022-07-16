@@ -1,18 +1,7 @@
 import numpy as np
 np.random.seed(42)
 import tensorflow as tf
-tf.set_random_seed(42)
-
-# for reproducibility
-# https://github.com/fchollet/keras/issues/2280
-session_conf = tf.ConfigProto(
-    intra_op_parallelism_threads=1,
-    inter_op_parallelism_threads=1
-)
-
-from keras import backend as K
-sess = tf.Session(graph=tf.get_default_graph(), config=session_conf)
-K.set_session(sess)
+tf.random.set_seed(42)
 
 from keras.models import Sequential
 from keras.layers import LSTM

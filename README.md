@@ -15,7 +15,7 @@ Build the image and run:
 
 ```
 docker build -t keras .
-docker run -it -v `pwd`:/app keras python3 main.py
+docker run -it --env .env.sample -v `pwd`:/app keras python3 main.py
 ```
 
 ## Results
@@ -26,11 +26,11 @@ Confusion matrix:
 Pred                LAYING  SITTING  STANDING  WALKING  WALKING_DOWNSTAIRS  WALKING_UPSTAIRS
 True
 LAYING                 510        0        27        0                   0                 0
-SITTING                  0      384       105        1                   0                 1
-STANDING                 0       89       443        0                   0                 0
-WALKING                  0        0         0      449                  28                19
-WALKING_DOWNSTAIRS       0        0         0        0                 419                 1
-WALKING_UPSTAIRS         0        5         1        2                  58               405
+SITTING                  0      385       103        1                   0                 2
+STANDING                 0       77       453        2                   0                 0
+WALKING                  0        0         0      464                  14                18
+WALKING_DOWNSTAIRS       0        1         1        3                 407                 8
+WALKING_UPSTAIRS         0        0         0       14                  19               438
 ```
 
 ## Resources:

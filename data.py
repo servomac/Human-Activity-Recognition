@@ -24,7 +24,7 @@ def load_signals(subset):
     for signal in SIGNALS:
         filename = f'{DATADIR}/{subset}/Inertial Signals/{signal}_{subset}.txt'
         signals_data.append(
-            _read_csv(filename).as_matrix()
+            _read_csv(filename).to_numpy()
         ) 
 
     # Transpose is used to change the dimensionality of the output,
@@ -42,7 +42,7 @@ def load_y(subset):
     filename = f'{DATADIR}/{subset}/y_{subset}.txt'
     y = _read_csv(filename)[0]
 
-    return pd.get_dummies(y).as_matrix()
+    return pd.get_dummies(y).to_numpy()
 
 def load_data():
     """
